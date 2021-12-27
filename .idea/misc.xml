@@ -8,10 +8,17 @@
         <entry key="..\:/Users/margalit/Documents/GitHub/FinalProjectApp/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/margalit/Documents/GitHub/FinalProjectApp/app/src/main/res/layout/network_security_config.xml" value="0.1" />
         <entry key="..\:/Users/margalit/FinalProjectApp/app/src/main/res/layout/content_main.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/student/AndroidStudioProjects/FinalProjectApp/app/src/main/res/layout/activity_main.xml" value="0.1265625" />
+        <entry key="..\:/Users/student/AndroidStudioProjects/FinalProjectApp/app/src/main/res/layout/app_bar_main.xml" value="0.1796875" />
+        <entry key="..\:/Users/student/AndroidStudioProjects/FinalProjectApp/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/student/AndroidStudioProjects/FinalProjectApp/app/src/main/res/layout/fragment_gallery.xml" value="0.1796875" />
+        <entry key="..\:/Users/student/AndroidStudioProjects/FinalProjectApp/app/src/main/res/layout/fragment_home.xml" value="0.1796875" />
+        <entry key="..\:/Users/student/AndroidStudioProjects/FinalProjectApp/app/src/main/res/layout/fragment_slideshow.xml" value="0.1796875" />
+        <entry key="..\:/Users/student/AndroidStudioProjects/FinalProjectApp/app/src/main/res/layout/nav_header_main.xml" value="0.1796875" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
