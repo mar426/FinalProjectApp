@@ -16,75 +16,66 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String SERVER = "http://10.0.2.2:3000/";
 
     private TextView tvServerResponse;
+    private TextView PostServerResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //GET:
         tvServerResponse = findViewById(R.id.textView);
         Button contactServerButton = findViewById(R.id.button);
         contactServerButton.setOnClickListener(onButtonClickListener);
+
+        //POST:
+        PostServerResponse = findViewById(R.id.textView1);
+        Button postServerButton = findViewById(R.id.button1);
+        postServerButton.setOnClickListener(postButtonClickListener);
     }
 
     View.OnClickListener onButtonClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            HttpGetRequest request = new HttpGetRequest();
-            request.execute();
+            HttpCall httpCall = new HttpCall();
+            httpCall.setMethodtype(HttpCall.GET);
+            httpCall.setUrl(SERVER);
+            HashMap<String,String> params = new HashMap<>();
+            params.put("name","James Bond");
+            httpCall.setParams(params);
+            new HttpRequest(){
+                @Override
+                public void onResponse(String response) {
+                    super.onResponse(response);
+                    tvServerResponse.setText("Get:"+response);
+                }
+            }.execute(httpCall);
         }
     };
 
-    public class HttpGetRequest extends AsyncTask<Void, Void, String> {
-
-        static final String REQUEST_METHOD = "GET";
-        static final int READ_TIMEOUT = 15000;
-        static final int CONNECTION_TIMEOUT = 15000;
-
+    View.OnClickListener postButtonClickListener = new View.OnClickListener() {
         @Override
-        protected String doInBackground(Void... params){
-            String result;
-            String inputLine;
-
-            try {
-                // connect to the server
-                //define url address:
-                URL myUrl = new URL(SERVER);
-                //open connection:
-                HttpURLConnection connection =(HttpURLConnection) myUrl.openConnection();
-                connection.setRequestMethod(REQUEST_METHOD);
-                connection.setReadTimeout(7000);
-                connection.setConnectTimeout(CONNECTION_TIMEOUT);
-                connection.connect();
-
-                // get the string from the input stream
-                InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
-                BufferedReader reader = new BufferedReader(streamReader);
-                StringBuilder stringBuilder = new StringBuilder();
-                while((inputLine = reader.readLine()) != null){
-                    stringBuilder.append(inputLine);
+        public void onClick(View v) {
+            HttpCall httpCallPost = new HttpCall();
+            httpCallPost.setMethodtype(HttpCall.POST);
+            httpCallPost.setUrl(SERVER);
+            HashMap<String,String> paramsPost = new HashMap<>();
+            paramsPost.put("name","Julius Cesar");
+            httpCallPost.setParams(paramsPost);
+            new HttpRequest(){
+                @Override
+                public void onResponse(String response) {
+                    super.onResponse(response);
+                    PostServerResponse.setText("Post:" +response);
                 }
-                reader.close();
-                streamReader.close();
-                result = stringBuilder.toString();
-
-            } catch(IOException e) {
-                e.printStackTrace();
-                result = "error";
-            }
-
-            return result;
+            }.execute(httpCallPost);
         }
-
-        protected void onPostExecute(String result){
-            super.onPostExecute(result);
-            tvServerResponse.setText(result);
-        }
-    }
+    };
 }
