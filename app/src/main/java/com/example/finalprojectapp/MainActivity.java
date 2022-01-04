@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +21,14 @@ import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String SERVER = "http://10.0.2.2:3000/";
+    private static final String SERVER = "http://10.0.2.2:3000/users/getUsers";
+    private static final String SERVER_POST = "http://10.0.2.2:3000/users/addUser";
 
     private TextView tvServerResponse;
     private TextView PostServerResponse;
+    private EditText lastName;
+    private EditText firstName;
+    private EditText userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         PostServerResponse = findViewById(R.id.textView1);
         Button postServerButton = findViewById(R.id.button1);
         postServerButton.setOnClickListener(postButtonClickListener);
+        lastName=findViewById(R.id.editTextLastName);
+        firstName=findViewById(R.id.editTextName);
+        userID=findViewById(R.id.editTextID);
+
     }
 
     View.OnClickListener onButtonClickListener = new View.OnClickListener() {
@@ -65,10 +74,13 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             HttpCall httpCallPost = new HttpCall();
             httpCallPost.setMethodtype(HttpCall.POST);
-            httpCallPost.setUrl(SERVER);
-            HashMap<String,String> paramsPost = new HashMap<>();
-            paramsPost.put("name","Julius Cesar");
-            httpCallPost.setParams(paramsPost);
+            httpCallPost.setUrl(SERVER_POST);
+            HashMap<String,String> params = new HashMap<>();
+            params.put("userID","123");
+            params.put("firstName","Lio");
+            params.put("lastName","Mar");
+            httpCallPost.setParams(params);
+            Log.d("params:", String.valueOf(params));
             new HttpRequest(){
                 @Override
                 public void onResponse(String response) {

@@ -1,6 +1,10 @@
 package com.example.finalprojectapp;
 
 import android.os.AsyncTask;
+import android.os.Build;
+import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -37,6 +41,7 @@ public class HttpRequest extends AsyncTask<HttpCall, String, String>{
                 OutputStream os = urlConnection.getOutputStream();
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, UTF_8));
                 writer.append(dataParams);
+                Log.d("dataParams:", dataParams);
                 writer.flush();
                 writer.close();
                 os.close();
@@ -61,6 +66,7 @@ public class HttpRequest extends AsyncTask<HttpCall, String, String>{
         return response.toString();
     }
 
+//    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
